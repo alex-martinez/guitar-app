@@ -1,5 +1,5 @@
-- Fix store
-- Convert fret into component
+✓ Fix store
+✓ Convert fret into component
 - Add fret numbers
 - Add fret indicators
 - Tabs with information panel

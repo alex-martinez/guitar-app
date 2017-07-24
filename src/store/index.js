@@ -1,16 +1,16 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import createLogger from 'Plugins/logger';
-import neck from 'Modules/neck';
+import { state, getters, mutations } from 'Store/store';
 
 Vue.use(Vuex);
 
 const debug = process.env.NODE_ENV !== 'production';
 
 export default new Vuex.Store({
-  modules: {
-    neck,
-  },
+  state,
+  getters,
+  mutations,
   strict: debug,
   plugins: debug ? [createLogger()] : [],
 });

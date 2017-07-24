@@ -1,45 +1,33 @@
 <template>
   <div class="neck">
-    <template v-for="(string, stringIndex) in strings">
-      <div
-        class="neck-string"
-        v-bind:class="[ `neck-string--${stringIndex}` ]"
-        v-bind:key="stringIndex">
-        <template v-for="(noteSettings, fretIndex) in string">
-          <div
-            v-bind:class="[
-              'neck-fret',
-              `neck-fret--${fretIndex}`,
-              noteSettings.selected ? 'neck-fret--selected' : '',
-              noteSettings.root ? 'neck-fret--root' : '',
-            ]"
-            v-bind:key="stringIndex"
-            v-on:click="toggleSelected({ string: stringIndex, fret: fretIndex })">
-            <div class="neck-note">{{ noteSettings.note }}</div>
-          </div>
-        </template>
-      </div>
-    </template>
+    <div
+      v-for="(string, stringIndex) in strings"
+      class="neck-string"
+      v-bind:class="[ `neck-string--${stringIndex}` ]"
+      v-bind:key="stringIndex">
+      <Fret
+        v-for="(fretSettings, fretIndex) in string"
+        v-bind:key="stringIndex"
+        v-bind:fret-settings="fretSettings"
+        v-bind:string-index="stringIndex"
+        v-bind:fret-index="fretIndex">
+      </Fret>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters } from 'vuex';
+import Fret from 'Components/Fret';
 
 export default {
+  components: {
+    Fret,
+  },
+
   computed: {
-    ...mapGetters('neck', [
+    ...mapGetters([
       'strings',
-    ]),
-  },
-
-  created() {
-    this.$store.dispatch('neck/getStrings');
-  },
-
-  methods: {
-    ...mapActions('neck', [
-      'toggleSelected',
     ]),
   },
 };
@@ -58,6 +46,11 @@ export default {
   body {
     background-color: $body-bg;
     margin: 0;
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    text-align: center;
+    color: #2c3e50;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   .neck {
