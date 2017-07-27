@@ -240,7 +240,7 @@ export default {
 
   .controls {
     padding: 15px;
-    margin-bottom: 60px;
+    margin-bottom: 70px;
     height: 50px;
     display: flex;
     align-items: stretch;

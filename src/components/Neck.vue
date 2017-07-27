@@ -3,7 +3,7 @@
     <div
       v-for="(string, stringIndex) in strings"
       class="neck-string"
-      v-bind:class="[ `neck-string--${stringIndex}` ]"
+      v-bind:class="[ `neck-string--${stringNumber(stringIndex)}` ]"
       v-bind:key="stringIndex">
       <Fret
         v-for="(fretSettings, fretIndex) in string"
@@ -29,6 +29,12 @@ export default {
     ...mapGetters([
       'strings',
     ]),
+  },
+
+  methods: {
+    stringNumber(index) {
+      return 6 - index;
+    },
   },
 };
 </script>
@@ -94,11 +100,36 @@ export default {
       &:last-child:after {top: 0;}
     }
 
+    // &:before used for selected/root/hover
+    // &:after used for indicator
     &-fret {
       flex: 1 0 0;
       border-left: 1px solid $neck-border-color;
       position: relative;
       cursor: pointer;
+
+      &__number {
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: auto;
+        top: -40px;
+      }
+
+      &--indicator:after {
+        content: "";
+        display: block;
+        width: 18px;
+        height: 18px;
+        background-color: #d3dae8;
+        // box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+        border-radius: 50%;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: -9px;
+        margin: auto;
+      }
 
       &--0 {
         border-left: none;

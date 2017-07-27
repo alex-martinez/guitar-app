@@ -1,13 +1,15 @@
 ✓ Fix store
 ✓ Convert fret into component
-- Add fret numbers
-- Add fret indicators
+✓ Add fret indicators
+✓ Add fret numbers
+- Move scss to scss files
+- Mobile guitar view
 - Tabs with information panel
     - Scales
         - All notes in the scale
         - Root note
         - Scale formula
-    - Chords in scale
+    - Chords in scale (chord progressions)
     - Chords
     - Chord arpeggios
     - Chord name
