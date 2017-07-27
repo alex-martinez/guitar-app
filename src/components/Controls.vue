@@ -26,7 +26,7 @@
       <div class="select">
         <select v-model="selectedScaleType">
           <option disabled value="">Type</option>
-          <option v-for="type in scaleTypes" v-bind:value="type">{{ type }}</option>
+          <option v-for="type in scaleTypes" v-bind:value="type.value">{{ type.name }}</option>
         </select>
       </div>
     </div>
@@ -42,7 +42,7 @@
       <div class="select">
         <select v-model="selectedChordType">
           <option disabled value="">Type</option>
-          <option v-for="type in chordTypes" v-bind:value="type">{{ type }}</option>
+          <option v-for="type in chordTypes" v-bind:value="type.value">{{ type.name }}</option>
         </select>
       </div>
     </div>
@@ -57,9 +57,7 @@ export default {
   data() {
     return {
       scaleRoots: Object.keys(NOTE_MAP),
-      scaleTypes: Object.keys(SCALE),
       chordRoots: Object.keys(NOTE_MAP),
-      chordTypes: Object.keys(CHORD),
     };
   },
 
@@ -76,6 +74,26 @@ export default {
 
     isTabChord() {
       return this.selectedTab === 'chord';
+    },
+
+    scaleTypes() {
+      const scaleNames = Object.keys(SCALE);
+      const formattedNames = scaleNames.map(this.snakeToSpaceCase).map(this.toTitleCase);
+
+      return scaleNames.map((value, index) => ({
+        value,
+        name: formattedNames[index],
+      }));
+    },
+
+    chordTypes() {
+      const chordNames = Object.keys(CHORD);
+      const formattedNames = chordNames.map(this.snakeToSpaceCase).map(this.toTitleCase);
+
+      return chordNames.map((value, index) => ({
+        value,
+        name: formattedNames[index],
+      }));
     },
 
     selectedScaleRoot: {
@@ -124,6 +142,14 @@ export default {
       'changeStringState',
       'changeTab',
     ]),
+
+    snakeToSpaceCase(str) {
+      return str.split('_').join(' ');
+    },
+
+    toTitleCase(str) {
+      return str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1));
+    },
   },
 };
 </script>
