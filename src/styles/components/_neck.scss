@@ -1,0 +1,207 @@
+.neck {
+    width: 95%;
+    height: 250px;
+    border-right: 1px solid $neck-border-color;
+    margin: 0 auto;
+    font-weight: 500;
+
+    display: flex;
+    align-items: stretch;
+    flex-wrap: wrap-reverse; // Reverse to show in the correct order
+
+    @include respond-to($tablet) {
+        height: auto;
+        max-width: 250px;
+        margin: 0 auto 30px;
+        border-bottom: 1px solid $neck-border-color;
+        border-right: none;
+        flex-wrap: wrap;
+    }
+
+    // String container
+    &-string {
+        width: 100%;
+        position: relative;
+        display: flex;
+
+        @include respond-to($tablet) {
+            width: auto;
+            flex: 1 0 0;
+            flex-wrap: wrap;
+        }
+
+        // String
+        &:before {
+            content: "";
+            display: block;
+            width: 100%;
+            border-top: 1px solid $neck-border-color;
+            position: absolute;
+            top: 50%;
+
+            @include respond-to($tablet) {
+                height: 100%;
+                width: 50%;
+                background-color: $body-bg;
+                border-top: none;
+                border-left: 1px solid $neck-border-color;
+                left: 50%;
+                top: 0;
+            }
+        }
+
+        // Hide excess border lengths of .neck and .neck-string
+        &:first-child:after,
+        &:last-child:after {
+            content: "";
+            display: block;
+            width: 101%;
+            height: 50%;
+            background-color: $body-bg;
+            position: absolute;
+            left: -1px;
+
+            @include respond-to($tablet) {
+                left: auto;
+                top: 0;
+                height: 101%;
+                width: 50%;
+            }
+        }
+
+        &:first-child:after {bottom: -1px;}
+        &:last-child:after {top: 0;}
+
+        @include respond-to($tablet) {
+            &:first-child:after {
+                bottom: auto;
+                left: 0;
+            }
+
+            &:last-child:after {
+                top: auto;
+                right: -1px;
+            }
+        }
+    }
+
+    // :before used for selected/root/hover
+    // :after used for indicator
+    &-fret {
+        flex: 1 0 0;
+        border-left: 1px solid $neck-border-color;
+        position: relative;
+        cursor: pointer;
+        user-select: none;
+        text-align: center;
+
+        @include respond-to($tablet) {
+            flex: 0 1 auto;
+            height: 70px;
+            width: 100%;
+            border-left: none;
+            border-top: 1px solid $neck-border-color;
+        }
+
+        &--0 {
+            border-left: none;
+            background-color: $body-bg;
+            max-width: 50px;
+
+            @include respond-to($tablet) {
+                border-top: none;
+            }
+
+            &:before {
+                display: none;
+            }
+        }
+
+        &--1 {
+            border-left-width: 4px;
+
+            @include respond-to($tablet) {
+                border-left-width: 0;
+                border-top-width: 4px;
+            }
+        }
+
+        // Selected circle, hidden by default
+        &:before {
+            content: "";
+            display: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: $selected;
+            border: 1px solid #000;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: $z2;
+        }
+
+        // Show on hover
+        &:hover:before {
+            display: block;
+            opacity: .5;
+        }
+
+        &__number {
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin: auto;
+            top: -40px;
+            cursor: default;
+
+            @include respond-to($tablet) {
+                top: 50%;
+                right: -40px;
+                left: auto;
+                transform: translateY(-50%);
+            }
+        }
+
+        &--indicator:after {
+            content: "";
+            display: block;
+            width: 18px;
+            height: 18px;
+            background-color: #d3dae8;
+            // box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: -9px;
+            margin: auto;
+        }
+
+        // Show if selected
+        &--selected:before,
+        &--selected:hover:before {
+            display: block;
+            opacity: 1;
+        }
+
+        &--root:before {
+            background-color: $root;
+        }
+    }
+
+    &-note {
+        z-index: $z3;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    // Background color used for text contrast
+    .neck-fret:not(.neck-fret--selected):not(:hover) .neck-note {
+        background-color: $body-bg;
+        padding: 0 3px;
+    }
+}

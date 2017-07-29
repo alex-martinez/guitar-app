@@ -16,15 +16,12 @@ export const state = {
 
 export const getters = {
   selectedTab: state => state.tab,
-
   selectedChord: state => state.chord,
-
   selectedScale: state => state.scale,
 
   strings: ({ tab, tuning, scale, chord }) => {
     const scaleDegrees = tab === 'scale' ? SCALE[scale.type] : CHORD[chord.type];
     const root = tab === 'scale' ? scale.root : chord.root;
-
     return getStringState(tuning, root, scaleDegrees);
   },
 

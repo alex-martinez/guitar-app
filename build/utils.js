@@ -50,7 +50,11 @@ exports.cssLoaders = function (options) {
     postcss: generateLoaders(),
     less: generateLoaders('less'),
     sass: generateLoaders('sass', { indentedSyntax: true }),
-    scss: generateLoaders('sass'),
+    scss: generateLoaders('sass', {
+      // https://github.com/vuejs-templates/webpack/issues/149
+      includePaths: ['./src/styles/'],
+      data: '@import "styles.scss";'
+    }),
     stylus: generateLoaders('stylus'),
     styl: generateLoaders('stylus')
   }
