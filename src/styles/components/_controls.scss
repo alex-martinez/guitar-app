@@ -5,4 +5,22 @@
     display: flex;
     align-items: stretch;
     justify-content: center;
+
+    .variation {
+        cursor: pointer;
+        display: inline-block;
+        padding: 3px 5px;
+        margin: 0 5px;
+        border: 1px solid $border;
+        border-radius: 3px;
+        background-color: #fff;
+
+        &:not(.variation--selected):hover {
+            text-decoration: underline;
+        }
+
+        &--selected {
+            border-color: $blue;
+        }
+    }
 }

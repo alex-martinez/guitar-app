@@ -2,8 +2,8 @@
 ✓ Convert fret into component
 ✓ Add fret indicators
 ✓ Add fret numbers
-- Move scss to scss files
-- Mobile guitar view
+✓ Move scss to scss files
+✓ Mobile guitar view
 - Tabs with information panel
     - Scales
         - All notes in the scale

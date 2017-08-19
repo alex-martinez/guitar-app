@@ -22,19 +22,19 @@
 
     &.is-boxed a:hover {
         background-color: #fff;
-        border-color: #dbdbdb;
+        border-color: $border;
     }
 
     &.is-boxed li.is-active a {
         background-color: #f5f6f8;
-        border-color: #dbdbdb;
+        border-color: $border;
         border-bottom-color: transparent !important;
     }
 
     a {
         align-items: center;
-        border-bottom: 1px solid #dbdbdb;
-        color: #4a4a4a;
+        border-bottom: 1px solid $border;
+        color: $text;
         cursor: pointer;
         display: flex;
         justify-content: center;
@@ -59,7 +59,7 @@
 
     ul {
         align-items: center;
-        border-bottom: 1px solid #dbdbdb;
+        border-bottom: 1px solid $border;
         display: flex;
         flex-grow: 1;
         flex-shrink: 0;
